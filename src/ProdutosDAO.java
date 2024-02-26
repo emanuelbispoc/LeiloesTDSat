@@ -34,11 +34,12 @@ public class ProdutosDAO {
             
             conn.close();
         }catch(SQLException e) {
-            System.out.println("AAA"+e.getMessage());
+            System.out.println("ERRO: "+e.getMessage());
         }    
     }
     
-    public ArrayList<ProdutosDTO> listarProdutos(){
+    public ArrayList<ProdutosDTO> listarProdutos() {
+        
         
         return listagem;
     }
