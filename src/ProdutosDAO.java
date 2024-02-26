@@ -10,7 +10,6 @@
 
 import java.sql.PreparedStatement;
 import java.sql.Connection;
-import javax.swing.JOptionPane;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -39,13 +38,33 @@ public class ProdutosDAO {
     }
     
     public ArrayList<ProdutosDTO> listarProdutos() {
-        
+        try {
+            resultset = conn.prepareStatement("SELECT * FROM produtos")
+                    .executeQuery();
+            
+            gerarResultado(resultset);
+        } catch (Exception e) {
+        }
         
         return listagem;
     }
     
-    
-    
-        
+    private void gerarResultado(ResultSet rs) {        
+        try {            
+            while (rs.next()) {
+                listagem.add(
+                        new ProdutosDTO(
+                                rs.getInt("id"),
+                                rs.getString("nome"),
+                                rs.getInt("valor"),
+                                rs.getString("status")
+                        )
+                ); 
+            }
+        } catch (SQLException e) {
+            System.out.println("ERRO: " + e.getMessage());
+        }     
+    }
+         
 }
 
