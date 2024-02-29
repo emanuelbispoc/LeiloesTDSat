@@ -60,6 +60,19 @@ public class ProdutosDAO {
         }
     }
     
+    public ArrayList<ProdutosDTO> listarProdutosVendidos() {
+        try {
+            resultset = conn.prepareStatement("SELECT * FROM produtos WHERE status='Vendido'")
+                    .executeQuery();
+            
+            gerarResultado(resultset);
+        } catch (Exception e) {
+            System.out.println("ERRO: "+e.getMessage());
+        }
+        
+        return listagem;
+    }
+    
     private void gerarResultado(ResultSet rs) {        
         try {            
             while (rs.next()) {
