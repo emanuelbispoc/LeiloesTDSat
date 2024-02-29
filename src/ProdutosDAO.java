@@ -49,6 +49,17 @@ public class ProdutosDAO {
         return listagem;
     }
     
+    public void venderProduto(int id) {
+        try {
+            prep = conn.prepareStatement("UPDATE produtos SET status='Vendido' WHERE id=?");
+            prep.setInt(1, id);
+            
+            prep.execute();
+        } catch (Exception e) {
+            System.out.println("ERRO: "+e.getMessage());
+        }
+    }
+    
     private void gerarResultado(ResultSet rs) {        
         try {            
             while (rs.next()) {
